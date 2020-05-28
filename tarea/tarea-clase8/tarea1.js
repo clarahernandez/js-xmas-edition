@@ -1,10 +1,21 @@
+function validarNumeroFamiliares(event) {
+    const $cantidadFamiliares = document.querySelector('#cantidad-familiares');
+    const cantidadFamiliares = Number($cantidadFamiliares.value);
+
+    if (cantidadFamiliares === 0) return false;
+    if (!/^[1-9]{1,2}$/.test(cantidadFamiliares)) return false;
+    if (!Number.isInteger(cantidadFamiliares)) return false;
+    return true;
+}
+
 document.querySelector('#boton-siguiente').onclick = function (event) {
     const $cantidadFamiliares = document.querySelector('#cantidad-familiares');
     const cantidadFamiliares = Number($cantidadFamiliares.value);
 
-    borrarFamiliaresAnteriores(cantidadFamiliares);
-    crearFamiliares(cantidadFamiliares);
-
+    if (validarNumeroFamiliares()) {
+        borrarFamiliaresAnteriores(cantidadFamiliares);
+        crearFamiliares(cantidadFamiliares);
+    }
     event.preventDefault(); //Evita que se envíe el formulario.
 };
 
